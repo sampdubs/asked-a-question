@@ -29,5 +29,7 @@ export async function logQuestion(student) {
 
 export async function getStudentData() {
     const students = await getDocs(col);
-    return students.docs.map(doc => ({ student: doc.id, questions: doc.data().questions }));
+    return students.docs
+        .map(doc => ({ student: doc.id, questions: doc.data().questions }))
+        .sort((a, b)=> a.student.localeCompare(b.student));
 }
