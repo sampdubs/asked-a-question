@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { generateNameOptions, logQuestion } from './helpers';
+import { dateToString, generateNameOptions, logQuestion } from './helpers';
 import { useNavigate } from "react-router-dom";
 
 function Log() {
@@ -21,6 +21,8 @@ function Log() {
 
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const [date, setDate] = useState(dateToString(new Date()));
+
   const [validated, setValidated] = useState(false);
 
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ function Log() {
     event.stopPropagation();
     if (form.checkValidity() !== false && selectedOption != null) {
       setValidated(true);
-      if (logQuestion(selectedOption)) {
+      if (logQuestion(selectedOption, Date.parse(date))) {
         navigate("/success");
       } else {
         navigate("/error");
@@ -41,8 +43,11 @@ function Log() {
 
   return (
     <Container className="mx-2">
+    <Row className="my-3">
+      <Col><h1>D4: Drug Design, Development, and Delivery</h1></Col>
+    </Row>
       <Row className="my-3">
-        <Col><h1>I asked a question!</h1></Col>
+        <Col><h3>I asked a question or made a comment!</h3></Col>
       </Row>
       <Form validated={validated} onSubmit={handleSubmit}>
         <Row className="my-2">
@@ -57,9 +62,16 @@ function Log() {
           />
         </Row>
         <Row className="my-2">
+          <Form.Control
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required />
+        </Row>
+        <Row className="my-2">
           <Form.Check
             type="checkbox"
-            label="I asked a question in class today"
+            label="I asked a question in class on this date"
             required />
         </Row>
         <Row className="my-2">

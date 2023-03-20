@@ -2,7 +2,7 @@
   "name": "asked-a-question",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://sampdubs.github.io/asked-a-question",
+  "homepage": "http://sampdubs.github.io/asked-a-question/#",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

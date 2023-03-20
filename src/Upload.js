@@ -12,7 +12,6 @@ function Upload() {
 
     const fileHandler = (event) => {
         setData(event.target.files[0]);
-        console.log(event.target.files[0]);
     }
 
     const navigate = useNavigate();

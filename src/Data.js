@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { getStudentData } from './helpers';
+import { getStudentData, timestampToDate } from './helpers';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
@@ -24,6 +24,7 @@ function Data() {
                     <tr>
                         <th>Student</th>
                         <th># Questions answered</th>
+                        <th>Dates answered</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +32,10 @@ function Data() {
                         data.map((data, i) => (
                             <tr key={i}>
                                 <td>{data.student}</td>
-                                <td>{data.questions}</td>
+                                <td>{data.questions.length}</td>
+                                <td>{data.questions.map((date, j) => timestampToDate(date)
+                                    ).join(", ")
+                                }</td>
                             </tr>
                         ))
                     }

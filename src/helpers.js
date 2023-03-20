@@ -20,11 +20,12 @@ export async function generateNameOptions() {
     return students.docs.map(doc => ({ value: doc.id, label: doc.id }));
 }
 
-export async function logQuestion(student) {
+export async function logQuestion(student, timestamp) {
     const studentDoc = doc(db, 'class', student.value);
     const docSnap = await getDoc(studentDoc);
-    console.log(docSnap);
-    setDoc(studentDoc, { questions: docSnap.data().questions + 1 });
+    const questions = docSnap.data().questions;
+    questions.push(timestamp);
+    setDoc(studentDoc, { questions });
 }
 
 export async function getStudentData() {
@@ -35,11 +36,8 @@ export async function getStudentData() {
 }
 
 async function deleteAllStudents() {
-    console.log("Start delete");
     const students = await getDocs(col);
-    console.log("After delete");
     students.docs.forEach((student) => {
-        console.log("Deleting", student.ref);
         deleteDoc(student.ref);
     });
 }
@@ -51,7 +49,20 @@ export async function setStudentData(data) {
     for (let name of names) {
         if (name.trim()) {
             const studentDoc = doc(db, 'class', name);
-            setDoc(studentDoc, { questions: 0 });
+            setDoc(studentDoc, { questions: [] });
         }
     }
+}
+
+export function dateToString(date) {
+    const offset = date.getTimezoneOffset();
+    date = new Date(date.getTime() - (offset * 60 * 1000));
+    return date.toISOString().split('T')[0];
+}
+
+export function timestampToDate(timestamp) {
+    let date = new Date(timestamp);
+    const offset = date.getTimezoneOffset();
+    date = new Date(date.getTime() + (offset * 60 * 1000));
+    return date.toLocaleDateString("en-us");
 }
