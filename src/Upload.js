@@ -44,7 +44,6 @@ function Upload() {
                     <ul>
                         <li>Last name, First name each on a seperate line</li>
                         <li>Saved as a .txt file</li>
-                        <li>No blank lines</li>
                     </ul>
                 </Form.Label>
                 <Form.Control required type="file" size="sm" onChange={fileHandler} />
@@ -56,7 +55,7 @@ function Upload() {
                     required />
             </Form.Group>
             <Button variant="primary" type="submit" className="my-2">
-                Submit
+                Upload
             </Button>
         </Form>
     );
