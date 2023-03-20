@@ -1,8 +1,8 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { getStudentData, setStudentData } from './helpers';
+import { setStudentData } from './helpers';
 import { useNavigate } from "react-router-dom";
 
 function Upload() {
