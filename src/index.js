@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import Success from './Success';
 import Error from './Error';
 import Data from './Data';
+import Upload from './Upload';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
       <Route element={<Success />} path="/success" />
       <Route element={<Error />} path="/error" />
       <Route element={<Data />} path="/data" />
+      <Route element={<Upload />} path="/upload" />
     </Routes>
   </Router>
 );
