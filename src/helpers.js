@@ -44,7 +44,8 @@ async function deleteAllStudents() {
 
 export async function setStudentData(data) {
     await deleteAllStudents();
-    data = data.replace("\r", "");
+    data = data.replaceAll("\r", "\n");
+    data = data.replaceAll("\n\n", "\n");
     const names = data.split("\n");
     for (let name of names) {
         if (name.trim()) {
